@@ -9,7 +9,7 @@
 
 ![Trie DS](../Trie/Trie-DS.png)
 
-## Implementation of a Trie in Java:
+## Implementation of a Trie:
 ```java
 public class TrieNode {
     TrieNode[] children = new TrieNode[26]; // Assuming only lowercase English letters
