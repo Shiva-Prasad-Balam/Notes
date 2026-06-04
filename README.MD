@@ -1,4 +1,4 @@
 ## Table of Contents
 
-- [LinkedList](./src/main/java/org/example/linkedList/README.MD)
-- [Trie](./src/main/java/org/example/trie/README.MD)
+- [Arrays](./src/main/java/org/example/arrays)
+- [Trie](./src/main/java/org/example/trie)
