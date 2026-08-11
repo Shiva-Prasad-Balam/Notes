@@ -1,4 +1,4 @@
-``# Check if number is prime:
+### Check if number is prime:
 
 - why until sqrt(n)? Because if n is not prime, it can be factored into two factors a and b: n = a * b. If both a and b
   were greater than the square root of n, then a * b would be greater than n. Therefore, at least one of those factors
