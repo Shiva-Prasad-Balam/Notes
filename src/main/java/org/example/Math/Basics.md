@@ -19,7 +19,7 @@ public boolean isPrime(int n) {
 }
 ```
 
-# Prime Factorization:
+### Prime Factorization:
 
 - We don't have to check for every prime from beginning because once a number is divided by a prime, it will not be
   divisible by that prime and multiples of it again. So we can keep dividing the number by the same prime until it is no
@@ -40,3 +40,27 @@ public void primeFactorization(int n) {
     }
 }
 `````
+
+### Calculate power
+
+- The idea is to use the property of exponents: a^b = a^(b/2) * a^(b/2) if b is even, and a^b = a * a^(b-1) if b is odd.
+- TC: O(log b) because we are dividing the exponent by 2 in each recursive call.
+
+```java
+class Solution {
+  public double power(double x, int n) {
+    double ans = 1.0;
+    long nn = Math.abs((long) n); // Safely convert to long to prevent Integer.MIN_VALUE overflow
+    while (nn > 0) {
+      if (nn % 2 != 0) {
+        ans = ans * x; // If the current bit is 1 (odd number), multiply ans by the current base
+      }
+      x = x * x; // Square the base and divide exponent by 2 on every iteration
+      nn = nn / 2;
+    }
+    // Invert the result if the original exponent was negative
+    return (n < 0) ? 1.0 / ans : ans;
+  }
+}
+
+```
