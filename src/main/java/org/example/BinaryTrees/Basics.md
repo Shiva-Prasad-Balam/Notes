@@ -16,12 +16,36 @@ void preOrderTraversalIterative(Node root) {
     st.push(root);
     while (!st.isEmpty()) {
         Node curr = st.pop();
-        System.out.print(current.data + " ");
-        if (current.right != null) stack.push(current.right);
-        if (current.left != null) stack.push(current.left);
+        System.out.print(curr.data + " ");
+        if (curr.right != null) st.push(curr.right);
+        if (curr.left != null) st.push(curr.left);
+    }
+}
+
+void morrisPreorderTraversal(Node root) {
+    Node current = root;
+    while (current != null) {
+        if (current.left == null) {
+            System.out.print(current.data + " ");
+            current = current.right;
+        } else {
+            Node predecessor = current.left;
+            while (predecessor.right != null && predecessor.right != current) {
+                predecessor = predecessor.right;
+            }
+            if (predecessor.right == null) {
+                System.out.print(current.data + " ");
+                predecessor.right = current;
+                current = current.left;
+            } else {
+                predecessor.right = null;
+                current = current.right;
+            }
+        }
     }
 }
 ```
+
 ### Inorder Traversal
 
 ```java
@@ -45,7 +69,31 @@ void inorderTraversalIterative(Node root) {
         curr = curr.right;
     }
 }
+
+void morrisInorderTraversal(Node root) {
+    Node current = root;
+    while (current != null) {
+        if (current.left == null) {
+            System.out.print(current.data + " ");
+            current = current.right;
+        } else {
+            Node predecessor = current.left;
+            while (predecessor.right != null && predecessor.right != current) {
+                predecessor = predecessor.right;
+            }
+            if (predecessor.right == null) {
+                predecessor.right = current;
+                current = current.left;
+            } else {
+                predecessor.right = null;
+                System.out.print(current.data + " ");
+                current = current.right;
+            }
+        }
+    }
+}
 ```
+
 ### Postorder Traversal
 
 ```java
@@ -84,13 +132,13 @@ void postorderTraversalIterativeSingleStack(Node root) {
             Node temp = st.peek().right;
             if (temp == null) {
                 temp = st.pop();
-                System.out.print(right.data + " ");
+                System.out.print(temp.data + " ");
                 while (!st.isEmpty() && temp == st.peek().right) {
                     temp = st.pop();
-                    System.out.print(right.data + " ");
+                    System.out.print(temp.data + " ");
                 }
             } else {
-                curr = right;
+                curr = temp;
             }
         }
     }
