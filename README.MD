@@ -8,3 +8,4 @@
 - [Heaps](./src/main/java/org/example/Heaps)
 - [BinaryTrees](./src/main/java/org/example/BinaryTrees)
 - [Trie](./src/main/java/org/example/Trie)
+- [Graphs](./src/main/java/org/example/Graphs)
