@@ -32,3 +32,23 @@ public void mex(int []a) {
     return mex;
 }
 ```
+
+### Next smaller element in an array
+- The next smaller element for an element x in an array is the first smaller element on the right side of x in the array.
+- If no such element exists, we can return -1 for that element.
+
+```java
+public int[] nextSmallerElement(int[] arr) {
+    int n = arr.length;
+    int[] nes = new int[n];
+    Stack<Integer> stack = new Stack<>();
+    for (int i = n - 1; i >= 0; i--) {
+        while (!stack.isEmpty() && arr[stack.peek()] >= arr[i]) {
+            stack.pop(); // Pop elements from the stack until we find a smaller element
+        }
+        nes[i] = stack.isEmpty() ? -1 : stack.peek(); // If stack is empty, there is no smaller element, otherwise the top of the stack is the next smaller element
+        stack.push(i); // Push the current element onto the stack
+    }
+    return nes; // Return the array containing the next smaller elements for each element in the input
+}
+```
