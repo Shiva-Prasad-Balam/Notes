@@ -38,3 +38,70 @@ public void dfsTraversal(int vertices, List<List<Integer>> adjacencyList) {
     dfs(0, visited, adjacencyList); // Start from the first vertex (0)
 }
 ```
+
+### Topological Sort
+
+- Topological sorting for a Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed 
+edge u → v, vertex u comes before v in the ordering.
+
+```java
+public void dfs(List<List<Integer>> adj, int vertex, boolean[] visited, Stack<Integer> stack) {
+    visited[vertex] = true;
+    for (int neighbor : adj.get(vertex)) {
+        if (!visited[neighbor]) {
+            dfs(adj, neighbor, visited, stack);
+        }
+    }
+    stack.push(vertex); // Push the vertex onto the stack after visiting all its neighbors
+}
+public void topologicalSort(int vertices, List<List<Integer>> adj) {
+    boolean[] visited = new boolean[vertices];
+    Stack<Integer> stack = new Stack<>();
+    for (int i = 0; i < vertices; i++) {
+        if (!visited[i]) {
+            dfs(adj, i, visited, stack);
+        }
+    }
+    while (!stack.isEmpty()) {
+        System.out.print(stack.pop() + " ");
+    }
+}
+```
+
+## Directed Graphs
+
+- A directed graph is a graph in which edges have a direction, meaning they go from one vertex to another. In a directed graph, an edge from vertex u to vertex v is represented as (u, v), indicating that there is a connection from u to v, but not necessarily from v to u.
+
+### Cycle Detection in Directed Graphs
+
+- To detect cycles in a directed graph, we can use Depth-First Search (DFS) along with two boolean arrays: one to keep track of visited vertices and another to keep track of the vertices in the current path of the DFS. If we encounter a vertex that is already in the current path, it indicates a cycle.
+
+```java
+boolean dfsHasCycle(int vertex, boolean[] visited, boolean[] pathVisited, List<List<Integer>> adj) {
+    visited[vertex] = true;
+    pathVisited[vertex] = true;
+    for (int neighbor : adj.get(vertex)) {
+        if (!visited[neighbor]) {
+            if (dfsHasCycle(neighbor, visited, pathVisited, adj)) {
+                return true; // Cycle detected in the recursive call
+            }
+        } else if (pathVisited[neighbor]) {
+            return true; // Cycle detected as the neighbor is already in the current path
+        }
+    }
+    pathVisited[vertex] = false; // Backtrack: remove the vertex from the current path
+    return false; // No cycle detected from this vertex
+}
+public boolean detect(int V, List<List<Integer>> adj) {
+    boolean[] visited = new boolean[V];
+    boolean[] pathVisited = new boolean[V];
+    for (int i = 0; i < V; i++) {
+        if (!visited[i]) {
+            if (dfsHasCycle(i, visited, pathVisited, adj)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+```
