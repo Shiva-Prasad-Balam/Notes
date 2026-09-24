@@ -1,4 +1,4 @@
-### Graphs
+## Graphs
 
 ### BFS Traversal
 
@@ -39,34 +39,38 @@ public void dfsTraversal(int vertices, List<List<Integer>> adjacencyList) {
 }
 ```
 
-### Topological Sort
+## Undirected Graphs
 
-- Topological sorting for a Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed 
-edge u → v, vertex u comes before v in the ordering.
+### Cycle Detection in Undirected Graphs
+
+- To detect cycles in an undirected graph, we can use Depth-First Search (DFS) along with a parent parameter to keep track of the vertex from which we came. If we encounter a visited vertex that is not the parent of the current vertex, it indicates a cycle.
 
 ```java
-public void dfs(List<List<Integer>> adj, int vertex, boolean[] visited, Stack<Integer> stack) {
+boolean dfsHasCycle(int vertex, int parent, boolean[] visited, List<List<Integer>> adj) {
     visited[vertex] = true;
-    for (int neighbor : adj.get(vertex)) {
+    for (int neighbor : adj.get(vertex)) { 
         if (!visited[neighbor]) {
-            dfs(adj, neighbor, visited, stack);
+            if (dfsHasCycle(neighbor, vertex, visited, adj)) {
+                return true; // Cycle detected in the recursive call
+            }
+        } else if (neighbor != parent) {
+            return true; // Cycle detected as the neighbor is already visited and is not the parent
         }
     }
-    stack.push(vertex); // Push the vertex onto the stack after visiting all its neighbors
+    return false; // No cycle detected from this vertex
 }
-public void topologicalSort(int vertices, List<List<Integer>> adj) {
-    boolean[] visited = new boolean[vertices];
-    Stack<Integer> stack = new Stack<>();
-    for (int i = 0; i < vertices; i++) {
+public boolean detect(int V, List<List<Integer>> adj) {
+    boolean[] visited = new boolean[V];
+    for (int i = 0; i < V; i++) {
         if (!visited[i]) {
-            dfs(adj, i, visited, stack);
+            if (dfsHasCycle(i, -1, visited, adj)) {
+                return true;
+            }
         }
     }
-    while (!stack.isEmpty()) {
-        System.out.print(stack.pop() + " ");
-    }
+    return false;
 }
-```
+```   
 
 ## Directed Graphs
 
@@ -103,5 +107,62 @@ public boolean detect(int V, List<List<Integer>> adj) {
         }
     }
     return false;
+}
+```
+
+### Topological Sort
+
+- Topological sorting for a Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed
+  edge u → v, vertex u comes before v in the ordering.
+
+```java
+public void dfs(List<List<Integer>> adj, int vertex, boolean[] visited, Stack<Integer> stack) {
+    visited[vertex] = true;
+    for (int neighbor : adj.get(vertex)) {
+        if (!visited[neighbor]) {
+            dfs(adj, neighbor, visited, stack);
+        }
+    }
+    stack.push(vertex); // Push the vertex onto the stack after visiting all its neighbors
+}
+public void topologicalSort(int vertices, List<List<Integer>> adj) {
+    boolean[] visited = new boolean[vertices];
+    Stack<Integer> stack = new Stack<>();
+    for (int i = 0; i < vertices; i++) {
+        if (!visited[i]) {
+            dfs(adj, i, visited, stack);
+        }
+    }
+    while (!stack.isEmpty()) {
+        System.out.print(stack.pop() + " ");
+    }
+}
+```
+- BFS-based Kahn's algorithm for topological sorting uses in-degree of vertices and a queue to process vertices with zero in-degree.
+
+```java
+public void topologicalSortKahn(int vertices, List<List<Integer>> adj) {
+    int[] inDegree = new int[vertices];
+    for (int i = 0; i < vertices; i++) {
+        for (int neighbor : adj.get(i)) {
+            inDegree[neighbor]++;
+        }
+    }
+    Queue<Integer> queue = new LinkedList<>();
+    for (int i = 0; i < vertices; i++) {
+        if (inDegree[i] == 0) {
+            queue.add(i);
+        }
+    }
+    while (!queue.isEmpty()) {
+        int currentVertex = queue.poll();
+        System.out.print(currentVertex + " ");
+        for (int neighbor : adj.get(currentVertex)) {
+            inDegree[neighbor]--;
+            if (inDegree[neighbor] == 0) {
+                queue.add(neighbor);
+            }
+        }
+    }
 }
 ```
