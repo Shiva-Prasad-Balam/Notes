@@ -38,7 +38,7 @@ public void dfsTraversal(int vertices, List<List<Integer>> adjacencyList) {
     dfs(0, visited, adjacencyList); // Start from the first vertex (0)
 }
 ```
-
+---
 ## Undirected Graphs
 
 ### Cycle Detection in Undirected Graphs
@@ -95,7 +95,7 @@ public void distanceFromSource(int vertices, List<List<Integer>> adjacencyList, 
     System.out.println(Arrays.toString(distance));
 }
 ```
-
+---
 ## Directed Graphs
 
 - A directed graph is a graph in which edges have a direction, meaning they go from one vertex to another. In a directed graph, an edge from vertex u to vertex v is represented as (u, v), indicating that there is a connection from u to v, but not necessarily from v to u.

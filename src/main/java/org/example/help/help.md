@@ -6,6 +6,8 @@
 
 *ITALIC*
 
+---
+
 - item
 - item 2
 
