@@ -72,6 +72,30 @@ public boolean detect(int V, List<List<Integer>> adj) {
 }
 ```   
 
+### Distance from Source in Undirected Graphs
+- To find the distance from a source vertex to all other vertices in an undirected graph, we can use Breadth-First Search (BFS). We maintain a distance array initialized to -1 (indicating unvisited vertices) and update the distance as we traverse the graph.
+
+```java
+public void distanceFromSource(int vertices, List<List<Integer>> adjacencyList, int source) {
+    int[] distance = new int[vertices];
+    Arrays.fill(distance, -1); // Initialize distances to -1 (unvisited)
+    Queue<Integer> queue = new LinkedList<>();
+    queue.add(source);
+    distance[source] = 0; // Distance to the source is 0
+    while (!queue.isEmpty()) {
+        int currentVertex = queue.poll();
+        for (int neighbor : adjacencyList.get(currentVertex)) {
+            if (distance[neighbor] == -1) { // If the neighbor has not been visited
+                distance[neighbor] = distance[currentVertex] + 1; // Update the distance
+                queue.add(neighbor); // Add the neighbor to the queue for further exploration
+            }
+        }
+    }
+    // Print the distances from the source to all vertices
+    System.out.println(Arrays.toString(distance));
+}
+```
+
 ## Directed Graphs
 
 - A directed graph is a graph in which edges have a direction, meaning they go from one vertex to another. In a directed graph, an edge from vertex u to vertex v is represented as (u, v), indicating that there is a connection from u to v, but not necessarily from v to u.
