@@ -18,3 +18,9 @@
 * **Core Invariant (The Translation):** **Fixed Path Length + 3D State Caching.**
   * *Path Invariant:* Any top-left to bottom-right path has length $n + m - 1$. If $n + m - 1$ is odd, return `false` instantly (valid parentheses require even length).
   * *State Invariant:* Cache `(row, col, balance)`. Max balance cannot exceed max path length ($n + m - 1$).
+---
+## Load Balancing & Fair Splitting
+* **Surface Disguise (The Trap):** Splitting a string, array, or graph into two groups to "minimize the maximum" depth, weight, or cost.
+* **Natural Instinct (The Trap):** Using Stacks to track pairs, or trying to logically group things by halves (e.g., `depth > max/2`).
+* **Core Invariant (The Translation):** **Parity Partitioning (`% 2`).**
+  * *The Shift:* Don't try to find a perfect middle ground. Deal the items out like a deck of cards. Assign odd depths/indices to Group 0, and even depths/indices to Group 1. This guarantees a mathematically perfect 50/50 split of the maximum load.
