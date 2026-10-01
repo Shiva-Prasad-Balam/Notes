@@ -96,6 +96,34 @@ public void distanceFromSource(int vertices, List<List<Integer>> adjacencyList, 
 }
 ```
 ---
+### Shortest from source to all vertices in an undirected graph
+- To find the shortest distance from a source vertex to all other vertices in an undirected graph, we can use Dijkstra's algorithm. This algorithm uses a priority queue to explore the vertices with the smallest known distance first, updating the distances to neighboring vertices as shorter paths are found.
+```java
+public void dijkstra(int vertices, List<List<int[]>> adjacencyList, int source) {
+    int[] distance = new int[vertices];
+    Arrays.fill(distance, Integer.MAX_VALUE); // Initialize distances to infinity
+    distance[source] = 0; // Distance to the source is 0
+    PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1])); // Min-heap based on distance
+    pq.add(new int[]{source, 0}); // Add the source vertex with distance 0
+    while (!pq.isEmpty()) {
+        int[] current = pq.poll();
+        int currentVertex = current[0];
+        int currentDistance = current[1];
+        if (currentDistance > distance[currentVertex]) continue; // Skip if we have already found a shorter path
+        for (int[] neighbor : adjacencyList.get(currentVertex)) {
+            int neighborVertex = neighbor[0];
+            int edgeWeight = neighbor[1];
+            if (distance[currentVertex] + edgeWeight < distance[neighborVertex]) {
+                distance[neighborVertex] = distance[currentVertex] + edgeWeight; // Update the distance
+                pq.add(new int[]{neighborVertex, distance[neighborVertex]}); // Add the neighbor to the priority queue
+            }
+        }
+    }
+    // Print the shortest distances from the source to all vertices
+    System.out.println(Arrays.toString(distance));
+}
+```
+---
 ## Directed Graphs
 
 - A directed graph is a graph in which edges have a direction, meaning they go from one vertex to another. In a directed graph, an edge from vertex u to vertex v is represented as (u, v), indicating that there is a connection from u to v, but not necessarily from v to u.
