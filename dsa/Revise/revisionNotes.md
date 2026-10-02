@@ -18,7 +18,7 @@
 * **Core Invariant (The Translation):** **Parity Partitioning (`% 2`).**
   * *The Shift:* Don't try to find a perfect middle ground. Deal the items out like a deck of cards. Assign odd depths/indices to Group 0, and even depths/indices to Group 1. This guarantees a mathematically perfect 50/50 split of the maximum load.
 ---
-## 7. Incremental Window Validation
+## Incremental Window Validation
 * **Surface Disguise (The Trap):** Problems asking for the longest/shortest subarray where no 3 elements satisfy a relation (like $a + b = c$ or $a \times b = c$).
 * **Natural Instinct (The Trap):** Calling an `isValid(s, e)` function inside the sliding window loop that re-sorts or re-scans the entire window from scratch ($O(N^3)$ TLE).
 * **Core Invariant (The Translation):** **Delta Inspection.**
