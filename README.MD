@@ -1,11 +1,13 @@
-## Table of Contents
+## Dsa
 
-- [Math](dsa/org/example/Math)
-- [BitManipulation](dsa/org/example/BitManipulation)
-- [Sorting](dsa/org/example/Sorting)
-- [Arrays](dsa/org/example/Arrays)
-- [LinkedList](dsa/org/example/LinkedList)
-- [Heaps](dsa/org/example/Heaps)
-- [BinaryTrees](dsa/org/example/BinaryTrees)
-- [Trie](dsa/org/example/Trie)
-- [Graphs](dsa/org/example/Graphs)
+- [Math](dsa/Math)
+- [BitManipulation](dsa/BitManipulation)
+- [Sorting](dsa/Sorting)
+- [Arrays](dsa/Arrays)
+- [LinkedList](dsa/LinkedList)
+- [Heaps](dsa/Heaps)
+- [BinaryTrees](dsa/BinaryTrees)
+- [Trie](dsa/Trie)
+- [Graphs](dsa/Graphs)
+
+## System design
