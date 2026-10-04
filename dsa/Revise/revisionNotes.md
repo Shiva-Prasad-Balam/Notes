@@ -23,3 +23,11 @@
 * **Natural Instinct (The Trap):** Calling an `isValid(s, e)` function inside the sliding window loop that re-sorts or re-scans the entire window from scratch ($O(N^3)$ TLE).
 * **Core Invariant (The Translation):** **Delta Inspection.**
   * *The Shift:* Assume `[s ... e-1]` is 100% valid. When `nums[e]` enters, ONLY inspect the relationships involving `nums[e]`. Never re-check existing elements against each other.
+---
+## Decision Tree Guardrails (Backtracking)
+* **Surface Signal:** "Generate ALL valid X", "Return all subsets/permutations".
+* **Immediate Pivot:** Stop thinking about loops, shifts, or array swaps. You are building a Recursive Decision Tree.
+* **The Derivation Rule:**
+  1. Define the options at step `i` (e.g., add `(` or add `)`).
+  2. Ask: "Under what exact state is Option A legal?" (`op < n`)
+  3. Ask: "Under what exact state is Option B legal?" (`cl < op`)
