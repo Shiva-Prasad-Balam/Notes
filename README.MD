@@ -9,5 +9,6 @@
 - [BinaryTrees](dsa/BinaryTrees)
 - [Trie](dsa/Trie)
 - [Graphs](dsa/Graphs)
+- [Revise](dsa/Revise)
 
 ## System design

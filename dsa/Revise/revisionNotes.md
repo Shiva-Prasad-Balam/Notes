@@ -31,3 +31,19 @@
   1. Define the options at step `i` (e.g., add `(` or add `)`).
   2. Ask: "Under what exact state is Option A legal?" (`op < n`)
   3. Ask: "Under what exact state is Option B legal?" (`cl < op`)
+---
+$$\text{Trigger ("Generate ALL / Find ALL") } + \text{ Small Constraints } (N \le 25) \longrightarrow \text{ Decision Tree (Backtracking)}$$
+```text
+1. READ CONSTRAINTS & PROMPT
+   ├── "Generate ALL..." / "Find ALL..."  ──> Signal: Recursion / Backtracking
+   └── N <= 25                             ──> Signal: O(2^N) fits within time limits
+
+2. DEFINE THE DECISION TREE
+   └── At index i, what are my explicit choices?
+       ├── Option 1: KEEP element s[i] (recurse to i + 1)
+       └── Option 2: SKIP / DELETE element s[i] (recurse to i + 1 if budget > 0)
+
+3. COMPUTE THE BUDGET (Pruning Guardrails)
+   └── Run a linear pass first to get exact removal limits (e.g., extraOpen, extraClose)
+   └── Use these limits as budgets to prune invalid recursive branches early
+```
