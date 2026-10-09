@@ -98,6 +98,7 @@ public void distanceFromSource(int vertices, List<List<Integer>> adjacencyList, 
 ---
 ### Shortest from source to all vertices in an undirected graph
 - To find the shortest distance from a source vertex to all other vertices in an undirected graph, we can use Dijkstra's algorithm. This algorithm uses a priority queue to explore the vertices with the smallest known distance first, updating the distances to neighboring vertices as shorter paths are found.
+- Will fail for negative weights or cycles, as Dijkstra's algorithm assumes all edge weights are non-negative.
 ```java
 public void dijkstra(int vertices, List<List<int[]>> adjacencyList, int source) {
     int[] distance = new int[vertices];
@@ -121,6 +122,33 @@ public void dijkstra(int vertices, List<List<int[]>> adjacencyList, int source) 
     }
     // Print the shortest distances from the source to all vertices
     System.out.println(Arrays.toString(distance));
+}
+```
+### Shortest from source to all vertices in an undirected graph with negative weights
+- Bellman-Ford algorithm can be used which will handle negative weights and detect negative cycles. It relaxes all edges up to V-1 times, where V is the number of vertices.
+- If we can still relax an edge in the V-th iteration, it indicates a negative cycle in the graph.
+
+```java
+public void bellmanFord(int vertices, int[][] edges, int source) {
+    int[] distance = new int[vertices];
+    Arrays.fill(distance, Integer.MAX_VALUE); // Initialize distances to infinity
+    distance[source] = 0; // Distance to the source is 0
+    for (int i = 1; i <= vertices; i++) {
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            int weight = edge[2];
+            
+            int newDistance = distance[u] + weight;
+            if (distance[u] != Integer.MAX_VALUE && newDistance < distance[v]) {
+              if (i == vertices ) { // If we are in the V-th iteration, a negative cycle is detected
+                System.out.println("Graph contains a negative-weight cycle");
+                return; // Negative cycle detected
+              }
+              distance[v] = newDistance; // Update the distance
+            }
+        }
+    }
 }
 ```
 ---
