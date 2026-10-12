@@ -47,3 +47,11 @@ $$\text{Trigger ("Generate ALL / Find ALL") } + \text{ Small Constraints } (N \l
    └── Run a linear pass first to get exact removal limits (e.g., extraOpen, extraClose)
    └── Use these limits as budgets to prune invalid recursive branches early
 ```
+---
+### Bitwise Column Invariance & Redistribution
+* **Trigger:** Bitwise operators (`&`, `|`, `^`) + operations that feel like they mutate numbers across the whole array.
+* **Core Insight:** Numbers are an illusion. Bit positions ($0$ to $31$) are **completely independent vertical lanes**. Operations either conserve bit counts or redistribute tokens within the same column.
+* **Universal Playbook:**
+  1. **Vertical Collapse:** Count `1`s per bit position across all elements into a frequency array (`bits[32]`).
+  2. **De-couple:** Stop looking at numbers horizontally. Treat each column as an isolated resource pool.
+  3. **Reconstruct/Calculate:** Build your target values or compute contributions column-by-column (greedily or via math) instead of simulating array swaps.
