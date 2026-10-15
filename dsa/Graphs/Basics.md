@@ -152,6 +152,38 @@ public void bellmanFord(int vertices, int[][] edges, int source) {
 }
 ```
 ---
+### Floyd-Warshall Algorithm
+- Used to find the shortest paths between all pairs of vertices in a weighted graph.
+- Uses matrix graph representation and explores x to y via z by tracking distance from x to y and checking if going through z provides a shorter path.
+- This x to y via z approach is repeated for all vertices as intermediate points, ensuring that all possible paths are considered.
+```java
+public void floydWarshall(int vertices, int[][] edges) {
+    int[][] dist = new int[vertices][vertices];
+    for(int i = 0; i < vertices; i++) {
+        Arrays.fill(dist[i], Integer.MAX_VALUE); // Initialize distances to infinity
+        dist[i][i] = 0; // Distance from a vertex to itself is 0
+    }
+    for(int[] edge : edges) {
+        int u = edge[0];
+        int v = edge[1];
+        int weight = edge[2];
+        dist[u][v] = weight; // Set the distance for the edge
+        dist[v][u] = weight; // For undirected graphs, set the distance in both directions
+    }
+
+    for(int k = 0; k < vertices; k++) { // Go from i to j via k which exhaustively checks all vertices as intermediate points
+        for(int i = 0; i < vertices; i++) {
+            for(int j = 0; j < vertices; j++) {
+                if (dist[i][k] != Integer.MAX_VALUE && dist[k][j] != Integer.MAX_VALUE) {
+                    dist[i][j] = Math.min(dist[i][j], dist[i][k] + dist[k][j]); // Update the shortest path
+                }
+            }
+        }
+    }
+    // The values in dist[i][j] now represent the shortest distance from vertex i to vertex j
+}
+```
+---
 ## Directed Graphs
 
 - A directed graph is a graph in which edges have a direction, meaning they go from one vertex to another. In a directed graph, an edge from vertex u to vertex v is represented as (u, v), indicating that there is a connection from u to v, but not necessarily from v to u.
