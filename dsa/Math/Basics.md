@@ -85,5 +85,28 @@ class Solution {
     return (n < 0) ? 1.0 / ans : ans;
   }
 }
-
+```
+### Pascal's Triangle - nCr (Binomial Coefficient)
+- Each number in Pascal's triangle is the sum of the two numbers directly above it.
+- The value at row `n` and column `r` represents `nCr`.
+```java
+public void pascalsTriangle(int n) {
+    int PT[][] = new int[n][n];
+    for (int line = 0; line < n; line++) {
+        for (int i = 0; i <= line; i++) {
+            if (i == 0 || i == line) {
+                PT[line][i] = 1; // The first and last values in each row are always 1
+            } else {
+                PT[line][i] = PT[line - 1][i - 1] + PT[line - 1][i]; // Each number is the sum of the two numbers above it
+            }
+        }
+    }
+}
+// Recursive function to calculate nCr
+public int nCr(int n, int r) {
+    if (r == 0 || r == n) {
+        return 1;
+    }
+    return nCr(n - 1, r - 1) + nCr(n - 1, r);
+}
 ```
