@@ -109,4 +109,23 @@ public int nCr(int n, int r) {
     }
     return nCr(n - 1, r - 1) + nCr(n - 1, r);
 }
+// nCr double loop
+public int nCrDoubleLoop(int n, int r) {
+  int ans = 1;
+  for(int i= n-r+1; i<=n; i++) {
+    ans *= i;
+  }
+  for(int i=1; i<=r; i++) {
+    ans /= i;
+  }
+  return ans;
+}
+// Iterative function to calculate nCr
+public int nCrIterative(int n, int r) {
+  double ans = 1;
+  for(int i=1; i<=r; i++) {
+    ans = ans * ((n - r + i) / i);
+  }
+  return (int) (ans + 0.01); // Adding a small value to handle floating-point precision issues
+}
 ```
