@@ -184,6 +184,40 @@ public void floydWarshall(int vertices, int[][] edges) {
 }
 ```
 ---
+### Minimum Spanning Tree (MST)
+- MST is a graph with n vertices and n-1 edges and sum of n-1 edges is minimum.
+- All vertices are connected and there are no cycles.
+```java
+public void primsAlgoToFindMST(int vertices, List<List<int[]>> adjacencyList) {
+    boolean[] visited = new boolean[vertices];
+    PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0])); // Min-heap based on edge weight
+    pq.add(new int[]{0, 0, -1}); // {weight, vertex, parentVertex}
+    int mstWeight = 0; // Total weight of the MST
+    List<int[]> mstEdges = new ArrayList<>(); // To store the edges of the MST
+    while (!pq.isEmpty()) {
+        int[] current = pq.poll();
+        int currentWeight = current[0];
+        int currentVertex = current[1];
+        int parentVertex = current[2];
+        
+        if (visited[currentVertex]) continue;
+        visited[currentVertex] = true;
+        mstWeight += currentWeight;
+        
+        if (parentVertex != -1) {
+            mstEdges.add(new int[]{parentVertex, currentVertex, currentWeight});
+        }
+        for (int[] edge : adjacencyList.get(currentVertex)) {
+            int neighbor = edge[0];
+            int weight = edge[1];
+            if (!visited[neighbor]) {
+                pq.add(new int[]{weight, neighbor, currentVertex}); // Add the edge to the priority queue
+            }
+        }
+    }
+}
+```
+---
 ## Directed Graphs
 
 - A directed graph is a graph in which edges have a direction, meaning they go from one vertex to another. In a directed graph, an edge from vertex u to vertex v is represented as (u, v), indicating that there is a connection from u to v, but not necessarily from v to u.
