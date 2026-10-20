@@ -312,3 +312,62 @@ public void topologicalSortKahn(int vertices, List<List<Integer>> adj) {
     }
 }
 ```
+---
+## Disjoint Set
+- It keeps track of a set of elements partitioned into disjoint (non-overlapping) subsets. 
+- Used to find and union sets.
+```java
+class DisjointSet {
+    int[] parent; // parent[i] points to the parent of i, if parent[i] = i then i is a root node
+    int[] rank; // rank[i] is the rank of the tree rooted at i, used for union by rank optimization
+    int[] size; // size[i] is the size of the tree rooted at i, used for union by size optimization
+  
+    public DisjointSet(int size) {
+        parent = new int[size + 1]; // +1 to handle 1-based indexing
+        rank = new int[size + 1];
+        size = new int[size + 1];
+        for (int i = 0; i <= size; i++) {
+            parent[i] = i; // Initially, each element is its own parent (root of its own tree)
+            rank[i] = 0; // Initial rank is 0
+            size[i] = 1; // Initial size is 1
+        }
+    }
+    
+    public int find(int x) {
+      if (parent[x] == x)
+        return x;
+      return parent[x] = find(parent[x]); // Path compression
+    }
+    
+    public void unionBySize(int x, int y) { // Union by size optimization
+        int rootX = find(x);
+        int rootY = find(y);
+        
+        if (rootX == rootY) return; // They are already in the same set
+  
+        if (size[rootX] < size[rootY]) {
+            parent[rootX] = rootY; // Attach the tree with smaller size to the tree with larger size
+            size[rootY] += size[rootX]; // Update the size of the new root
+        } else {
+            parent[rootY] = rootX;
+            size[rootX] += size[rootY];
+        }
+    }
+    
+    public void unionByRank(int x, int y) { // Union by rank optimization
+        int rootX = find(x);
+        int rootY = find(y);
+        
+        if (rootX = rootY) return; // They are already in the same set
+  
+        if (rank[rootX] < rank[rootY]) {
+            parent[rootX] = rootY; // Attach the tree with lower rank to the tree with higher rank
+        } else if (rank[rootX] > rank[rootY]) {
+            parent[rootY] = rootX;
+        } else {
+            parent[rootY] = rootX; // If ranks are equal, choose one as new root and increment its rank
+            rank[rootX]++;
+        }
+    }
+}
+```
