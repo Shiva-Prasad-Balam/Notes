@@ -64,3 +64,9 @@ $$\text{Trigger ("Generate ALL / Find ALL") } + \text{ Small Constraints } (N \l
 - **Failure Flags:**
   - **0 nodes with in-degree 0** $\rightarrow$ Cycle detected.
   - **>1 nodes with in-degree 0** $\rightarrow$ Disconnected graph or multiple roots.
+---
+## Sum of Sortable Integers - Pattern Notes
+- **Divisor Constraint:** Only check $k$ where $n \pmod k == 0$.
+- **Global Order Rule:** $\text{prevMax}[\text{left block}] \le \text{currMin}[\text{current block}]$ across all block boundaries.
+- **Internal Order Rule:** Total circular descents (internal drops + last-to-first wrap-around drop) inside each block must be $\le 1$.
+- **Optimization Strategy:** Precompute prev max, current min, and previous element > current counts to evaluate every block in $O(1)$ time.

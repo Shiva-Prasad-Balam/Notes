@@ -313,7 +313,7 @@ public void topologicalSortKahn(int vertices, List<List<Integer>> adj) {
 }
 ```
 ---
-## Disjoint Set
+## Disjoint Set (Union-Find)
 - It keeps track of a set of elements partitioned into disjoint (non-overlapping) subsets. 
 - Used to find and union sets.
 ```java
