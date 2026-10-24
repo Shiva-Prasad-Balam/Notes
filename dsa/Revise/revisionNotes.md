@@ -70,3 +70,12 @@ $$\text{Trigger ("Generate ALL / Find ALL") } + \text{ Small Constraints } (N \l
 - **Global Order Rule:** $\text{prevMax}[\text{left block}] \le \text{currMin}[\text{current block}]$ across all block boundaries.
 - **Internal Order Rule:** Total circular descents (internal drops + last-to-first wrap-around drop) inside each block must be $\le 1$.
 - **Optimization Strategy:** Precompute prev max, current min, and previous element > current counts to evaluate every block in $O(1)$ time.
+---
+## Interval Overlaps & Ranges (Dates / Times / Coordinates)
+* **Trigger:** Overlapping date ranges, time slots, or coordinate intervals where you need to find shared duration.
+* **The Shift:** Abandon messy chronological `if-else` branching and compound unit logic.
+* **Rules & Conversion:**
+  * **Flatten Compound Units:** Never handle nested fields (months/days or hours/minutes) separately. Convert compound formats into a **single linear integer/counter** first (e.g., prefix-sum day of the year, total minutes from midnight).
+  * **Overlap Start:** Latest start wins $\rightarrow$ `Math.max(start1, start2)`
+  * **Overlap End:** Earliest end wins $\rightarrow$ `Math.min(end1, end2)`
+  * **Safe Calculation:** `Math.max(0, overlapEnd - overlapStart + 1)` (automatically handles non-overlapping intervals by clamping negative values to `0`).
