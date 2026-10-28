@@ -79,3 +79,11 @@ $$\text{Trigger ("Generate ALL / Find ALL") } + \text{ Small Constraints } (N \l
   * **Overlap Start:** Latest start wins $\rightarrow$ `Math.max(start1, start2)`
   * **Overlap End:** Earliest end wins $\rightarrow$ `Math.min(end1, end2)`
   * **Safe Calculation:** `Math.max(0, overlapEnd - overlapStart + 1)` (automatically handles non-overlapping intervals by clamping negative values to `0`).
+---
+## Bounded State-Space Dimensions (Bitwise & XOR Grids)
+* **Trigger:** Grid or graph pathfinding involving bitwise operations (XOR, bitmasks) paired with a strict upper bound on cell values (e.g., `grid[i][j] <= 1023`).
+* **The Shift:** Stop treating accumulated values as unbounded scalars. Because operations like XOR are non-monotonic (values can drop or fluctuate), greedy min-heaps (Dijkstra) break. Treat the value limit as a discrete coordinate dimension.
+* **Rules:**
+  * **Constraint-Driven Sizing:** The cell value limit directly dictates the size of the 3D visited structure (e.g., max value $1023$ requires $10$ bits / $1024$ states, giving `vis[n][m][1024]`).
+  * **Queue Selection:** Avoid `PriorityQueue` ($O(\log N)$ heap overhead and false greedy assumptions). Use a standard FIFO queue (`ArrayDeque`) for $O(1)$ state traversal.
+  * **State Deduplication:** Prune redundant branches by tracking exact `(x, y, accumulated_value)` nodes to completely eliminate state-space explosion and TLE.
