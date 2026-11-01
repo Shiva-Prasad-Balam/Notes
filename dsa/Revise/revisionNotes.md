@@ -1,3 +1,8 @@
+## Contest thumb of rule never spend more than 30 minutes on a single problem. 
+- If you are stuck, move on to the next problem and come back later if time permits. 
+- As it's almost not possible to solve it if you're stuck for more than 30 minutes. 
+- Meaning you're missing some key insight or trick which you might have never seen before. So, it's better to move on and come back later with a fresh perspective.
+
 # Algorithmic Pattern Trigger Log
 
 ## End-Removal / Boundary Reduction
