@@ -27,3 +27,51 @@
   - Load testing tools (e.g., Apache JMeter, Locust)
   - Performance monitoring and profiling tools (e.g., New Relic, Datadog)
 ---
+## SQL vs NoSQL Databases
+- SQL Databases:
+  - Relational databases that use structured query language (SQL) for defining and manipulating data.
+  - Examples: MySQL, PostgreSQL, Oracle Database.
+  - Benefits:
+    - Strong consistency and ACID properties.
+    - Well-suited for complex queries and transactions.
+  - Drawbacks:
+    - Can be less flexible in handling unstructured data.
+- NoSQL Databases:
+  - Non-relational databases that can store and retrieve data in various formats (e.g., key-value, document, column-family, graph).
+  - Examples: MongoDB, Cassandra, Redis.
+  - Benefits:
+    - Flexible schema design, suitable for unstructured or semi-structured data.
+    - Can handle large volumes of data and high-velocity workloads.
+  - Drawbacks:
+    - May sacrifice consistency for availability and partition tolerance (CAP theorem).
+---
+## Load Balancing
+- Load balancing is the process of distributing incoming network traffic across multiple servers to ensure no single server becomes overwhelmed.
+- Benefits of load balancing:
+  - Improves system reliability and availability.
+  - Enhances performance by distributing the load evenly.
+- Types of load balancing algorithms:
+  - Round Robin: Distributes requests sequentially across servers.
+  - Least Connections: Directs traffic to the server with the fewest active connections.
+  - IP Hash: Routes requests based on the client's IP address, ensuring that a client consistently connects to the same server.
+- Load balancers can be implemented at different layers:
+  - Layer 4 (Transport Layer): Operates at the TCP/UDP level, making routing decisions based on IP addresses and ports.
+  - Layer 7 (Application Layer): Operates at the HTTP/HTTPS level, making routing decisions based on application-level data (e.g., URL, headers, cookies).
+- Common load balancing solutions:
+  - Hardware Load Balancers: Dedicated physical devices designed for load balancing (e.g., F5 BIG-IP).
+  - Software Load Balancers: Software-based solutions that can run on standard servers (e.g., HAProxy, Nginx).
+  - Cloud-based Load Balancers: Managed load balancing services provided by cloud providers (e.g., AWS Elastic Load Balancing, Google Cloud Load Balancing).
+## Sharding
+- Sharding is a database architecture pattern that involves partitioning data across multiple databases or servers to improve performance and scalability.
+- Benefits of sharding:
+  - Distributes the load across multiple servers, allowing for better performance and scalability.
+  - Reduces the risk of a single point of failure by isolating data across shards.
+- Drawbacks of sharding:
+  - Increases complexity in application logic and database management.
+  - Requires careful planning of shard keys to ensure even distribution of data and load.
+- Types of sharding:
+  - Horizontal Sharding: Distributes rows of a table across multiple databases based on a shard key (e.g., user ID, geographic region).
+  - Vertical Sharding: Distributes different tables or columns of a database across multiple databases based on their usage patterns (e.g., separating frequently accessed tables from less frequently accessed ones).
+- Considerations for sharding:
+  - Choose an appropriate shard key that ensures even distribution of data and load.
+  - Monitor and manage shard growth to prevent hotspots and ensure balanced performance.
