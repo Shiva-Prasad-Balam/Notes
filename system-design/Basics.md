@@ -95,3 +95,34 @@
     - Data consistency: Ensuring data consistency across multiple DBs can be challenging, especially in distributed systems.
 ---
 ## Consistency vs Availability
+- Consistency:
+  - Ensures that all nodes in a distributed system see the same data at the same time.
+  - 2 or more db's ensured to have the same data at any given time.
+  - Achieved through techniques like distributed transactions, consensus algorithms, and replication protocols.
+- Availability:
+  - Ensures that the system remains operational and responsive, even in the presence of failures.
+  - Achieved through techniques like load balancing, failover mechanisms, and redundancy.
+---
+## Message Queues
+- Message queues are used to decouple the sender and receiver of messages in a distributed system.
+- Benefits:
+  - Improved scalability: Allows for asynchronous communication between components, enabling better handling of high loads.
+  - Fault tolerance: Messages can be stored in the queue until they are successfully processed, ensuring that no messages are lost.
+  - Load leveling: Helps to smooth out spikes in traffic by allowing the receiver to process messages at its own pace.
+  - Improved reliability: By decoupling the sender and receiver, message queues can improve the overall reliability of the system.
+- Pub/Sub model: 
+  - A messaging pattern where publishers send messages to a topic, and subscribers receive messages from that topic.
+  - Benefits:
+    - Decoupling: Publishers and subscribers are decoupled, allowing for greater flexibility and scalability.
+    - Scalability: Multiple subscribers can receive messages from the same topic, enabling better handling of high loads.
+    - Flexibility: Subscribers can choose which topics to subscribe to, allowing for more targeted message delivery.
+- Message Queue Implementations:
+  - RabbitMQ: A widely used open-source message broker that implements the Advanced Message Queuing Protocol (AMQP).
+  - Apache Kafka: A distributed streaming platform that can be used as a message queue, designed for high-throughput and fault-tolerant messaging.
+  - Amazon SQS: A fully managed message queuing service provided by AWS, offering scalability and reliability for distributed applications.
+- Event Driven Systems:
+  - An architectural pattern where the flow of the program is determined by events, such as user actions, sensor outputs, or messages from other programs.
+  - Benefits:
+    - Decoupling: Components can operate independently, responding to events as they occur.
+    - Scalability: Event-driven systems can handle high loads by processing events asynchronously.
+    - Flexibility: New event types and handlers can be added without modifying existing components.

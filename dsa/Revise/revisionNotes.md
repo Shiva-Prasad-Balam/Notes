@@ -92,3 +92,12 @@ $$\text{Trigger ("Generate ALL / Find ALL") } + \text{ Small Constraints } (N \l
   * **Constraint-Driven Sizing:** The cell value limit directly dictates the size of the 3D visited structure (e.g., max value $1023$ requires $10$ bits / $1024$ states, giving `vis[n][m][1024]`).
   * **Queue Selection:** Avoid `PriorityQueue` ($O(\log N)$ heap overhead and false greedy assumptions). Use a standard FIFO queue (`ArrayDeque`) for $O(1)$ state traversal.
   * **State Deduplication:** Prune redundant branches by tracking exact `(x, y, accumulated_value)` nodes to completely eliminate state-space explosion and TLE.
+---
+## GCD-Connected Arrays & Prime Factorization (Smallest Prime Factor Shift)
+* **Trigger:** Problems involving `GCD > 1` across adjacent elements, connected arrays with divisibility constraints, or minimizing/maximizing values under factor dependencies.
+* **The Shift:** Stop splitting solutions into messy casework (even numbers, odd primes, odd composites). Translate the problem immediately into **prime factors and parity**.
+* **Rules:**
+  * **The GCD $\to$ Prime Factor Rule:** Whenever `GCD > 1` is required, adjacent numbers must share at least one prime factor. Never guess linear steps; look for the **Smallest Prime Factor ($p$)** of the value.
+  * **The First Jump (Anchor):** The initial step away from a target value to satisfy the GCD constraint must be its smallest prime factor $p$ (if composite, or the prime itself if prime).
+  * **The Parity Shift (+2 Rule):** Once anchored, subsequent steps can propagate by **$2$**. Odd $\pm$ odd or even $\pm$ even preserves parity and guarantees a shared factor of at least $2$ with the absolute minimum growth required.
+  * **Anti-Casework Check:** If you find yourself writing multiple `if-else` branches for even/odd/prime variations, look for the unified invariant: *Find the Smallest Prime Factor ($p$), anchor once, then step by 2.*
