@@ -75,3 +75,23 @@
 - Considerations for sharding:
   - Choose an appropriate shard key that ensures even distribution of data and load.
   - Monitor and manage shard growth to prevent hotspots and ensure balanced performance.
+---
+## Data Stores
+- Bloom Filters:
+  - Used to check if an element is already searched in a set or not.
+  - Example: A string is passed through hash functions and the bits at the resulting indices are set to 1. If the string is searched again, it is passed through the same hash functions and if any of the bits at the resulting indices is 0, then it is definitely not in the set. If all bits are 1, then it may be in the set.
+  - It is a space-efficient probabilistic data structure that can quickly determine if an element is definitely not in the set or may be in the set.
+  - Benefits:
+    - Space-efficient: Requires less memory compared to storing the entire set.
+    - Fast membership testing: Can quickly determine if an element is in the set or not.
+- Data Replication:
+  - 2 or more DBs are used to store the same data. This is done to ensure high availability and fault tolerance.
+  - One can be a master DB and the others can be slave DBs. The master DB is used for write operations and the slave DBs are used for read operations.
+  - Benefits:
+    - High availability: If the master DB fails, one of the slave DBs can take over.
+    - Fault tolerance: Data is replicated across multiple DBs, so if one DB fails, the data is still available in other DBs.
+  - Drawbacks:
+    - Increased complexity: Managing multiple DBs can be complex and requires additional resources.
+    - Data consistency: Ensuring data consistency across multiple DBs can be challenging, especially in distributed systems.
+---
+## Consistency vs Availability
