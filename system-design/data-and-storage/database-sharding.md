@@ -29,8 +29,8 @@ hash("user_001") % 4 = 2 → Shard 2
 hash("user_002") % 4 = 0 → Shard 0
 hash("user_003") % 4 = 3 → Shard 3
 ```
-**Pros**: Even distribution (if hash function is good). No hotspots from sequential keys.
-**Cons**: Range queries impossible (can’t ask “all users with ID 100-200” — they’re scattered). Adding shards requires rehashing (use consistent hashing to fix this).
+- **Pros**: Even distribution (if hash function is good). No hotspots from sequential keys.
+- **Cons**: Range queries impossible (can’t ask “all users with ID 100-200” — they’re scattered). Adding shards requires rehashing (use consistent hashing to fix this).
 **Best for**: Key-value lookups, user data, sessions.
 2. Range-Based Sharding: Assign contiguous ranges to each shard.
 ```
@@ -38,9 +38,9 @@ Shard 0: userId 0 - 999,999
 Shard 1: userId 1,000,000 - 1,999,999
 Shard 2: userId 2,000,000 - 2,999,999
 ```
-**Pros**: Range queries work naturally (“get all users from 1M to 1.5M”). Simple to understand.
-**Cons**: Hotspots if data isn’t evenly distributed (new users all hit the last shard). Uneven shard sizes over time.
-**Best for**: Time-series data (shard by month), geographic data (shard by region).
+- **Pros**: Range queries work naturally (“get all users from 1M to 1.5M”). Simple to understand.
+- **Cons**: Hotspots if data isn’t evenly distributed (new users all hit the last shard). Uneven shard sizes over time.
+- **Best for**: Time-series data (shard by month), geographic data (shard by region).
 3. Directory-Based Sharding: Maintain a lookup table that maps each key to its shard.
 ```
 Lookup table:
@@ -50,17 +50,17 @@ Lookup table:
 
 Query: look up shard in directory, then query that shard.
 ```
-**Pros**: Flexible — can move any key to any shard. Rebalancing is easy (update directory).
-**Cons**: Directory is a single point of failure. Extra hop for every query.
-**Best for**: When you need fine-grained control over data placement.
+- **Pros**: Flexible — can move any key to any shard. Rebalancing is easy (update directory).
+- **Cons**: Directory is a single point of failure. Extra hop for every query.
+- **Best for**: When you need fine-grained control over data placement.
 4. Geographic Sharding: Shard by user’s geographic region.
 ```
 Shard "US": all US users (servers in us-east-1)
 Shard "EU": all EU users (servers in eu-west-1)
 Shard "APAC": all Asia-Pacific users (servers in ap-south-1)
 ```
-**Pros**: Data locality (low latency for users near their shard). Compliance (EU data stays in EU for GDPR).
-**Cons**: Uneven distribution (US shard might be 5x larger). Cross-region queries are expensive.
+- **Pros**: Data locality (low latency for users near their shard). Compliance (EU data stays in EU for GDPR).
+- **Cons**: Uneven distribution (US shard might be 5x larger). Cross-region queries are expensive.
 ---
 ### Choosing a Shard Key
 - The shard key determines which shard a row goes to. It’s the most important decision in sharding.
