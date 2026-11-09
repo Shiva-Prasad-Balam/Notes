@@ -13,7 +13,7 @@ With LB:
 - **Scalability**: Add more servers behind the LB when traffic grows.
 - **Performance**: Spread load evenly so no server is a bottleneck.
 - **Maintenance**: Take a server offline for updates without affecting users.
-![load-balancer](./load-balancer-diagram.png)
+![load-balancer](./images/load-balancer-diagram.png)
 
 ## Load Balancing Algorithms
 1. Round Robin: Rotate through servers in order: 1 → 2 → 3 → 1 → 2 → 3 ...

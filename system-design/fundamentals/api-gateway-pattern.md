@@ -9,7 +9,7 @@
     - Deal with different protocols (gRPC, REST, GraphQL)
 
 ### Gateway Responsibilities
-![API Gateway](api-gateway.png)
+![API Gateway](./images/api-gateway.png)
 - Routing: The gateway routes incoming requests to the appropriate microservice based on the request path, method, and other criteria (Map /api/users/123 to User Service, /api/orders to Order Service).
 - Authentication: Validate JWT/OAuth tokens before forwarding
 - Rate Limiting: Enforce per-user or per-IP request limits
@@ -23,7 +23,7 @@
 
 ### Backend for Frontend (BFF) Pattern
 - Different clients have different needs. A mobile app needs compact responses; a web dashboard needs rich data. BFF provides a dedicated gateway per client type.
-![Backend for Frontend](bff-pattern-api-gateway.png)
+![Backend for Frontend](./images/bff-pattern-api-gateway.png)
 - BFF benefits:
   - Optimized response payloads per client (mobile gets less data)
   - Different auth flows (mobile = OAuth + biometric, web = session cookies)
@@ -50,7 +50,7 @@
   - High performance, custom configs
 
 ### Api Gateway vs Load Balancer
-![Api Gateway vs Load Balancer](api-gateway-vs-load-balancer.png)
+![Api Gateway vs Load Balancer](./images/api-gateway-vs-load-balancer.png)
 
 ### Gateway Antipatterns
 - God Gateway: A single gateway that handles too many responsibilities, leading to complexity and tight coupling with backend services. It becomes a bottleneck and a single point of failure.
