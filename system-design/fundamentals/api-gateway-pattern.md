@@ -9,7 +9,7 @@
     - Deal with different protocols (gRPC, REST, GraphQL)
 
 ### Gateway Responsibilities
-![API Gateway](./images/api-gateway.png)
+![API Gateway](./images/api-gateway.jpg)
 - Routing: The gateway routes incoming requests to the appropriate microservice based on the request path, method, and other criteria (Map /api/users/123 to User Service, /api/orders to Order Service).
 - Authentication: Validate JWT/OAuth tokens before forwarding
 - Rate Limiting: Enforce per-user or per-IP request limits
