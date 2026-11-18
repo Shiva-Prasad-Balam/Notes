@@ -26,7 +26,7 @@
 - Calculate billing - BillingService - BillingService.calculate()
 - Find available slot - Strategy - ParkingStrategy.findSlot()
 
-3. Map Relationships – 1 Minute\
+3. Map Relationships – 1 Minute
     ```
     // Relationships become fields and constructor parameters:
     public class ParkingLot {
